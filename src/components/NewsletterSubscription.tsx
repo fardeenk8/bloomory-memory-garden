@@ -102,7 +102,7 @@ const NewsletterSubscription = ({
         onChange={(e) => setEmail(e.target.value)}
         // Only show placeholder if not focused and not typing
         placeholder={!isFocused && !email ? placeholder : ""}
-        className="flex-1"
+        className="flex-1 text-black placeholder-gray-400 caret-black"
         disabled={isLoading}
         autoFocus
         onFocus={() => setIsFocused(true)}
