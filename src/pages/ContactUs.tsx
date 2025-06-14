@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, MessageCircle, Users, Wrench, Loader2, Instagram, Linkedin, Facebook, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, Users, Wrench, Loader2, Instagram, Linkedin, Facebook, X } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -112,7 +112,7 @@ const ContactUs = () => {
 
   const socialLinks = [
     { name: "Facebook", icon: Facebook, href: "https://facebook.com/bloomoryai" },
-    { name: "Twitter", icon: Twitter, href: "https://twitter.com/bloomoryai" },
+    { name: "Twitter", icon: X, href: "https://twitter.com/bloomoryai" },
     { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/bloomoryai/" },
     { name: "Instagram", icon: Instagram, href: "https://instagram.com/bloomoryai" }
   ];
