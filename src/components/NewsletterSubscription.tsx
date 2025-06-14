@@ -101,6 +101,7 @@ const NewsletterSubscription = ({
         placeholder={placeholder}
         className="flex-1"
         disabled={isLoading}
+        autoFocus
       />
       <Button 
         type="submit" 
@@ -123,3 +124,4 @@ const NewsletterSubscription = ({
 };
 
 export default NewsletterSubscription;
+
