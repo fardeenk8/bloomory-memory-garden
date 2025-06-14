@@ -37,8 +37,8 @@ const Hero = () => {
             <Heart className="w-5 h-5 mr-2" />
             Start for Free
           </Button>
-          <Button size="lg" className="bg-white/10 border-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60 text-lg px-8 py-4 rounded-full backdrop-blur-md shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <Play className="w-5 h-5 mr-2" />
+          <Button size="lg" className="bg-white/10 border-2 border-white/40 text-black hover:bg-white/20 hover:border-white/60 text-lg px-8 py-4 rounded-full backdrop-blur-md shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <Play className="w-5 h-5 mr-2 text-black" />
             Watch Demo
           </Button>
         </div>
