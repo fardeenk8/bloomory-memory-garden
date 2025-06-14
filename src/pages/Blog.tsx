@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,8 +9,11 @@ import { Link } from "react-router-dom";
 import blogPosts from "@/data/blogPosts";
 
 const Blog = () => {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [visiblePosts, setVisiblePosts] = useState(6);
+
   const categories = [
-    { name: "All", count: 24, active: true },
+    { name: "All", count: 24, icon: undefined },
     { name: "Memory Tips", count: 8, icon: Camera },
     { name: "AI Photography", count: 6, icon: Brain },
     { name: "Business Guides", count: 5, icon: Lightbulb },
@@ -34,6 +37,22 @@ const Blog = () => {
     return category?.icon || Tag;
   };
 
+  const filteredPosts = activeCategory === "All" 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === activeCategory);
+
+  const displayedPosts = filteredPosts.slice(0, visiblePosts);
+  const hasMorePosts = displayedPosts.length < filteredPosts.length;
+
+  const handleLoadMore = () => {
+    setVisiblePosts(prev => prev + 6);
+  };
+
+  const handleCategoryChange = (categoryName: string) => {
+    setActiveCategory(categoryName);
+    setVisiblePosts(6); // Reset visible posts when changing category
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -54,15 +73,17 @@ const Blog = () => {
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {categories.map((category, index) => {
               const IconComponent = category.icon || Tag;
+              const isActive = activeCategory === category.name;
               return (
                 <Button
                   key={index}
-                  variant={category.active ? "default" : "outline"}
+                  variant={isActive ? "default" : "outline"}
                   className={`${
-                    category.active 
+                    isActive 
                       ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700" 
                       : "hover:bg-purple-50"
                   }`}
+                  onClick={() => handleCategoryChange(category.name)}
                 >
                   {category.icon && <IconComponent className="w-4 h-4 mr-2" />}
                   {category.name} ({category.count})
@@ -131,7 +152,6 @@ const Blog = () => {
         </div>
       </section>
 
-// -- show the actual cards from data and link to individual posts --
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-12">
@@ -139,7 +159,7 @@ const Blog = () => {
             <p className="text-gray-600">Stay updated with the latest insights and tips</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {blogPosts.map((post, index) => (
+            {displayedPosts.map((post, index) => (
               <Card key={post.slug} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                 <Link to={`/blog/${post.slug}`}>
                   <div className="relative">
@@ -191,11 +211,18 @@ const Blog = () => {
               </Card>
             ))}
           </div>
-          <div className="text-center">
-            <Button size="lg" variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
-              Load More Articles
-            </Button>
-          </div>
+          {hasMorePosts && (
+            <div className="text-center">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-purple-200 text-purple-600 hover:bg-purple-50"
+                onClick={handleLoadMore}
+              >
+                Load More Articles
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
