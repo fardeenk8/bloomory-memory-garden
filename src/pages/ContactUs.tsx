@@ -310,7 +310,7 @@ const ContactUs = () => {
                     >
                       {social.icon === "custom-x" ? (
                         <img
-                          src="/lovable-uploads/2c00163b-f2d8-44f2-a7b8-98d16f845796.png"
+                          src="/lovable-uploads/482b840d-6cd0-41d7-aba9-e846bb6daa78.png"
                           alt="X"
                           className="w-5 h-5 object-contain"
                           style={{ filter: 'contrast(1.1) brightness(0.92)' }}
