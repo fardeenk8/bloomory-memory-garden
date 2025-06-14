@@ -13,6 +13,10 @@ const Navigation = () => {
     { href: "/personal", label: "Personal Features" },
     { href: "/partners", label: "Become a Partner" },
     { href: "/pricing", label: "Pricing" },
+    { href: "/about", label: "About Us" },
+    { href: "/testimonials", label: "Testimonials" },
+    { href: "/blog", label: "Blog" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -30,12 +34,12 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
-                className={`font-medium transition-colors ${
+                className={`font-medium transition-colors text-sm ${
                   isActive(item.href)
                     ? "text-purple-600"
                     : "text-gray-600 hover:text-purple-600"
@@ -47,7 +51,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <Button variant="outline" size="sm">
               Log In
             </Button>
@@ -58,7 +62,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -67,7 +71,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link

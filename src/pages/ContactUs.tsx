@@ -1,0 +1,259 @@
+
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Mail, Phone, MapPin, MessageCircle, Users, Wrench } from "lucide-react";
+import { useState } from "react";
+
+const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    type: "general",
+    message: "",
+    phone: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Contact form submitted:", formData);
+    // Add form submission logic here
+    alert("Thank you for your message! We'll get back to you soon.");
+    setFormData({ name: "", email: "", type: "general", message: "", phone: "" });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email Us",
+      info: "hello@bloomoryai.com",
+      description: "For general inquiries and support"
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      info: "+1 (555) 123-4567",
+      description: "Business hours: 9 AM - 6 PM PST"
+    },
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      info: "San Francisco, CA",
+      description: "Headquarters & Development Center"
+    }
+  ];
+
+  const inquiryTypes = [
+    { value: "general", label: "General Inquiry", icon: MessageCircle },
+    { value: "partnership", label: "Partnership", icon: Users },
+    { value: "support", label: "Technical Support", icon: Wrench }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Get in Touch
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Have questions about BloomoryAI? Want to become a partner? We'd love to hear from you.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Form & Info */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Contact Form */}
+            <div>
+              <Card className="shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-900">
+                    Send us a message
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="name">Full Name *</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          type="text"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="mt-1"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="type">Inquiry Type *</Label>
+                      <select
+                        id="type"
+                        name="type"
+                        value={formData.type}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        required
+                      >
+                        {inquiryTypes.map((type) => (
+                          <option key={type.value} value={type.value}>
+                            {type.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="phone">Phone/WhatsApp (Optional)</Label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="mt-1"
+                        placeholder="+1 (555) 123-4567"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="message">Message *</Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-1 min-h-[120px]"
+                        placeholder="Tell us how we can help you..."
+                      />
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
+                      size="lg"
+                    >
+                      Send Message
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                  Contact Information
+                </h2>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  Our team is here to help you make the most of BloomoryAI. Whether you're a personal user, potential partner, or need technical assistance, we're ready to assist.
+                </p>
+              </div>
+
+              {/* Contact Cards */}
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => (
+                  <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                    <CardContent className="p-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="bg-gradient-to-br from-purple-500 to-pink-500 w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <info.icon className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                            {info.title}
+                          </h3>
+                          <p className="text-purple-600 font-medium mb-1">
+                            {info.info}
+                          </p>
+                          <p className="text-gray-600 text-sm">
+                            {info.description}
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Inquiry Types */}
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  What can we help you with?
+                </h3>
+                <div className="space-y-3">
+                  {inquiryTypes.map((type, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      <type.icon className="w-5 h-5 text-purple-600" />
+                      <span className="text-gray-700">{type.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="bg-white p-6 rounded-2xl shadow-lg">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  Connect with us
+                </h3>
+                <div className="flex space-x-4">
+                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
+                    <span className="sr-only">Facebook</span>
+                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
+                  </div>
+                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
+                    <span className="sr-only">Twitter</span>
+                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
+                  </div>
+                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
+                    <span className="sr-only">LinkedIn</span>
+                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
+                  </div>
+                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
+                    <span className="sr-only">Instagram</span>
+                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default ContactUs;
