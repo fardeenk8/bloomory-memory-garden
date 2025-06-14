@@ -1,10 +1,17 @@
-
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Play, Sparkles, Shield, Heart, Camera, Users, Briefcase, ArrowRight, Star, Quote } from "lucide-react";
 import Footer from "@/components/Footer";
+import PartnerRegistrationModal from "@/components/PartnerRegistrationModal";
+import PlanSelectionModal from "@/components/PlanSelectionModal";
+import NewsletterSubscription from "@/components/NewsletterSubscription";
+import { useState } from "react";
 
 const NewIndex = () => {
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
+
   const userTypes = [
     {
       icon: Camera,
@@ -60,6 +67,15 @@ const NewIndex = () => {
     }
   ];
 
+  const handleBecomePartner = () => {
+    setIsPartnerModalOpen(true);
+  };
+
+  const handleGetStarted = (plan: string = "freemium") => {
+    setSelectedPlan(plan);
+    setIsPlanModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -93,11 +109,19 @@ const NewIndex = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              onClick={() => handleGetStarted("freemium")}
+            >
               <Heart className="w-5 h-5 mr-2" />
               Get Started Free
             </Button>
-            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              onClick={handleBecomePartner}
+            >
               <Briefcase className="w-5 h-5 mr-2" />
               Become a Partner
             </Button>
@@ -227,8 +251,36 @@ const NewIndex = () => {
         </div>
       </section>
 
-      {/* Newsletter Subscription in Footer */}
+      {/* Newsletter Subscription */}
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-pink-600">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Stay Updated with Our Latest Posts
+          </h2>
+          <p className="text-purple-100 mb-8">
+            Get the latest memory preservation tips, AI insights, and feature updates delivered to your inbox.
+          </p>
+          <div className="max-w-md mx-auto">
+            <NewsletterSubscription 
+              placeholder="Enter your email"
+              buttonText="Subscribe"
+            />
+          </div>
+        </div>
+      </section>
+
       <Footer />
+
+      {/* Modals */}
+      <PartnerRegistrationModal 
+        isOpen={isPartnerModalOpen}
+        onClose={() => setIsPartnerModalOpen(false)}
+      />
+      <PlanSelectionModal 
+        isOpen={isPlanModalOpen}
+        onClose={() => setIsPlanModalOpen(false)}
+        selectedPlan={selectedPlan}
+      />
     </div>
   );
 };

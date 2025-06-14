@@ -2,9 +2,19 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Check, Star, Zap, Crown, Camera, Film, Users, Shield } from "lucide-react";
+import { Check, Star, Zap, Crown, Camera, Film, Users } from "lucide-react";
+import PlanSelectionModal from "@/components/PlanSelectionModal";
+import { useState } from "react";
 
 const PricingPage = () => {
+  const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("");
+
+  const handlePlanSelection = (planType: string) => {
+    setSelectedPlan(planType);
+    setIsPlanModalOpen(true);
+  };
+
   const plans = [
     {
       name: "Freemium",
@@ -21,7 +31,8 @@ const PricingPage = () => {
       ],
       limitations: ["Limited storage only"],
       cta: "Get Started Free",
-      popular: false
+      popular: false,
+      planType: "freemium"
     },
     {
       name: "Personal",
@@ -41,7 +52,8 @@ const PricingPage = () => {
       ],
       cta: "Choose Personal",
       popular: true,
-      badge: "Perfect for memory collectors"
+      badge: "Perfect for memory collectors",
+      planType: "personal"
     },
     {
       name: "Partner",
@@ -61,7 +73,8 @@ const PricingPage = () => {
       ],
       cta: "Go Professional",
       popular: false,
-      badge: "Grow your creative business"
+      badge: "Grow your creative business",
+      planType: "partner"
     }
   ];
 
@@ -141,6 +154,7 @@ const PricingPage = () => {
                 <Button 
                   size="lg" 
                   className={`w-full ${plan.popular ? 'bg-white text-purple-600 hover:bg-gray-100' : 'bg-purple-600 hover:bg-purple-700 text-white'} rounded-full py-4 text-lg font-semibold transition-all duration-300`}
+                  onClick={() => handlePlanSelection(plan.planType)}
                 >
                   {plan.cta}
                 </Button>
@@ -254,6 +268,13 @@ const PricingPage = () => {
       </section>
 
       <Footer />
+
+      {/* Plan Selection Modal */}
+      <PlanSelectionModal 
+        isOpen={isPlanModalOpen}
+        onClose={() => setIsPlanModalOpen(false)}
+        selectedPlan={selectedPlan}
+      />
     </div>
   );
 };

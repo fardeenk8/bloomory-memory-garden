@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, MessageCircle, Users, Wrench } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, Users, Wrench, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -17,13 +18,66 @@ const ContactUs = () => {
     message: "",
     phone: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact form submitted:", formData);
-    // Add form submission logic here
-    alert("Thank you for your message! We'll get back to you soon.");
-    setFormData({ name: "", email: "", type: "general", message: "", phone: "" });
+    
+    // Validate required fields
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields (Name, Email, Message).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // Simulate API call to backend
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      console.log("Contact form submission:", {
+        ...formData,
+        timestamp: new Date().toISOString()
+      });
+      
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({ 
+        name: "", 
+        email: "", 
+        type: "general", 
+        message: "", 
+        phone: "" 
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -98,6 +152,7 @@ const ContactUs = () => {
                           onChange={handleInputChange}
                           required
                           className="mt-1"
+                          disabled={isLoading}
                         />
                       </div>
                       <div>
@@ -110,6 +165,7 @@ const ContactUs = () => {
                           onChange={handleInputChange}
                           required
                           className="mt-1"
+                          disabled={isLoading}
                         />
                       </div>
                     </div>
@@ -155,6 +211,7 @@ const ContactUs = () => {
                         required
                         className="mt-1 min-h-[120px]"
                         placeholder="Tell us how we can help you..."
+                        disabled={isLoading}
                       />
                     </div>
 
@@ -162,8 +219,16 @@ const ContactUs = () => {
                       type="submit" 
                       className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
                       size="lg"
+                      disabled={isLoading}
                     >
-                      Send Message
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Sending Message...
+                        </>
+                      ) : (
+                        "Send Message"
+                      )}
                     </Button>
                   </form>
                 </CardContent>

@@ -21,12 +21,24 @@ const Navigation = () => {
 
   const isActive = (href: string) => location.pathname === href;
 
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2" onClick={handleNavClick}>
             <div className="bg-gradient-to-br from-pink-500 to-purple-600 w-8 h-8 rounded-lg flex items-center justify-center">
               <Heart className="w-4 h-4 text-white" />
             </div>
@@ -44,6 +56,7 @@ const Navigation = () => {
                     ? "text-purple-600"
                     : "text-gray-600 hover:text-purple-600"
                 }`}
+                onClick={handleNavClick}
               >
                 {item.label}
               </Link>
@@ -82,7 +95,7 @@ const Navigation = () => {
                       ? "text-purple-600"
                       : "text-gray-600"
                   }`}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={handleNavClick}
                 >
                   {item.label}
                 </Link>
