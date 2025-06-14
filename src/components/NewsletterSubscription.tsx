@@ -19,6 +19,8 @@ const NewsletterSubscription = ({
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  // Track input focus for placeholder logic
+  const [isFocused, setIsFocused] = useState(false);
   const { toast } = useToast();
 
   const validateEmail = (email: string) => {
@@ -98,10 +100,14 @@ const NewsletterSubscription = ({
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder={placeholder}
+        // Only show placeholder if not focused and not typing
+        placeholder={!isFocused && !email ? placeholder : ""}
         className="flex-1"
         disabled={isLoading}
         autoFocus
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        // The blinking cursor is the default; no extra code needed
       />
       <Button 
         type="submit" 
@@ -124,4 +130,3 @@ const NewsletterSubscription = ({
 };
 
 export default NewsletterSubscription;
-
