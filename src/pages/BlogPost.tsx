@@ -110,7 +110,6 @@ const BlogPost = () => {
                 Get the latest memory-keeping inspiration, personal stories, and digital legacy tips delivered straight to your inbox.
               </p>
             </div>
-            {/* NewsletterSubscription form: only render once */}
             <NewsletterSubscription className="w-full sm:w-auto mt-4 sm:mt-0" />
           </section>
 
