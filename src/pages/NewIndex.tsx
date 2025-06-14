@@ -4,7 +4,6 @@ import { Play, Sparkles, Shield, Heart, Camera, Users, Briefcase, ArrowRight, St
 import Footer from "@/components/Footer";
 import PartnerRegistrationModal from "@/components/PartnerRegistrationModal";
 import PlanSelectionModal from "@/components/PlanSelectionModal";
-import NewsletterSubscription from "@/components/NewsletterSubscription";
 import { useState } from "react";
 
 const NewIndex = () => {
@@ -247,24 +246,6 @@ const NewIndex = () => {
                 </div>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Subscription */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-pink-600">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Stay Updated with Our Latest Posts
-          </h2>
-          <p className="text-purple-100 mb-8">
-            Get the latest memory preservation tips, AI insights, and feature updates delivered to your inbox.
-          </p>
-          <div className="max-w-md mx-auto">
-            <NewsletterSubscription 
-              placeholder="Enter your email"
-              buttonText="Subscribe"
-            />
           </div>
         </div>
       </section>

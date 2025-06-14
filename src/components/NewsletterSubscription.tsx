@@ -61,6 +61,7 @@ const NewsletterSubscription = ({
           description: "You're already subscribed to our newsletter!",
           variant: "destructive",
         });
+        setIsLoading(false);
         return;
       }
 
