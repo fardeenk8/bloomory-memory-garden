@@ -5,8 +5,10 @@ import Footer from "@/components/Footer";
 import PartnerRegistrationModal from "@/components/PartnerRegistrationModal";
 import PlanSelectionModal from "@/components/PlanSelectionModal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewIndex = () => {
+  const navigate = useNavigate();
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
   const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
@@ -65,6 +67,14 @@ const NewIndex = () => {
       readTime: "4 min read"
     }
   ];
+
+  const handleLearnMore = (userType: string) => {
+    if (userType === "personal") {
+      navigate("/personal");
+    } else if (userType === "partners") {
+      navigate("/partners");
+    }
+  };
 
   const handleBecomePartner = () => {
     setIsPartnerModalOpen(true);
@@ -177,10 +187,19 @@ const NewIndex = () => {
                   <h3 className="text-2xl font-semibold text-gray-900">{type.title}</h3>
                 </div>
                 <p className="text-gray-600 leading-relaxed mb-6">{type.description}</p>
-                <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white">
+                <button
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white inline-flex items-center gap-2 rounded-md px-4 py-2 font-medium transition-colors"
+                  onClick={() =>
+                    handleLearnMore(
+                      type.title.toLowerCase().includes("personal")
+                        ? "personal"
+                        : "partners"
+                    )
+                  }
+                >
                   Learn More
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                </button>
               </div>
             ))}
           </div>

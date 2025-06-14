@@ -1,9 +1,11 @@
 import React from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, User, Tag, Camera, Brain, Lightbulb, Gift, TrendingUp, Clock } from "lucide-react";
+import { Calendar, User, Tag, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+import blogPosts from "@/data/blogPosts";
 
 const Blog = () => {
   const categories = [
@@ -25,63 +27,6 @@ const Blog = () => {
     category: "AI Photography",
     featured: true
   };
-
-  const blogPosts = [
-    {
-      title: "10 Creative Ways to Preserve Your Family's Holiday Memories",
-      excerpt: "From AI-organized photo albums to custom gift creation, discover innovative methods to make your holiday memories last forever.",
-      author: "Emily Watson",
-      date: "March 12, 2024",
-      readTime: "5 min read",
-      image: "/placeholder.svg",
-      category: "Memory Tips"
-    },
-    {
-      title: "How AI Facial Recognition is Revolutionizing Photo Organization",
-      excerpt: "Learn how BloomoryAI's advanced facial recognition technology can automatically organize decades of family photos in minutes.",
-      author: "Marcus Rodriguez",
-      date: "March 10, 2024",
-      readTime: "6 min read",
-      image: "/placeholder.svg",
-      category: "AI Photography"
-    },
-    {
-      title: "Partner Success Story: How Wedding Photographers Increased Revenue by 250%",
-      excerpt: "Discover how professional photographers are using BloomoryAI's partner tools to streamline their workflow and boost their business.",
-      author: "David Kim",
-      date: "March 8, 2024",
-      readTime: "7 min read",
-      image: "/placeholder.svg",
-      category: "Business Guides"
-    },
-    {
-      title: "Creating Perfect Photo Gifts: A Complete Guide",
-      excerpt: "Transform your digital memories into beautiful physical keepsakes with our comprehensive guide to photo gift creation.",
-      author: "Lisa Parker",
-      date: "March 5, 2024",
-      readTime: "4 min read",
-      image: "/placeholder.svg",
-      category: "Gift Ideas"
-    },
-    {
-      title: "BloomoryAI 2.0: New Features and Improvements",
-      excerpt: "Explore the latest updates including enhanced AI editing tools, improved sharing options, and new partner dashboard features.",
-      author: "Development Team",
-      date: "March 1, 2024",
-      readTime: "3 min read",
-      image: "/placeholder.svg",
-      category: "Updates"
-    },
-    {
-      title: "The Psychology of Memory: Why Visual Storytelling Matters",
-      excerpt: "Understanding the science behind memory formation and how visual storytelling enhances our ability to preserve meaningful moments.",
-      author: "Dr. Amanda Foster",
-      date: "February 28, 2024",
-      readTime: "9 min read",
-      image: "/placeholder.svg",
-      category: "Memory Tips"
-    }
-  ];
 
   const getCategoryIcon = (categoryName: string) => {
     const category = categories.find(cat => cat.name === categoryName);
@@ -185,7 +130,7 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Blog Posts Grid */}
+// -- show the actual cards from data and link to individual posts --
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-12">
@@ -194,33 +139,36 @@ const Blog = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {blogPosts.map((post, index) => (
-              <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <div className="relative">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <div className="flex items-center bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full">
-                      {React.createElement(getCategoryIcon(post.category), { 
-                        className: "w-3 h-3 text-purple-600 mr-1" 
-                      })}
-                      <span className="text-purple-600 font-medium text-xs">{post.category}</span>
+              <Card key={post.slug} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <Link to={`/blog/${post.slug}`}>
+                  <div className="relative">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-48 object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <div className="flex items-center bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full">
+                        <Tag className="w-3 h-3 text-purple-600 mr-1" />
+                        <span className="text-purple-600 font-medium text-xs">{post.category}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
-                    {post.title}
-                  </h3>
+                  <Link to={`/blog/${post.slug}`}>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-purple-700 transition-colors">
+                      {post.title}
+                    </h3>
+                  </Link>
                   <p className="text-gray-600 mb-4 line-clamp-3">
-                    {post.excerpt}
+                    {post.excerpt.substring(0, 150)}{post.excerpt.length > 150 ? "..." : ""}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                     <div className="flex items-center">
                       <User className="w-3 h-3 mr-1" />
-                      {post.author}
+                      {post.author.name}
                     </div>
                     <div className="flex items-center">
                       <Clock className="w-3 h-3 mr-1" />
@@ -232,16 +180,16 @@ const Blog = () => {
                       <Calendar className="w-3 h-3 mr-1" />
                       {post.date}
                     </div>
-                    <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
-                      Read More
-                    </Button>
+                    <Link to={`/blog/${post.slug}`}>
+                      <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+                        Read More
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-
-          {/* Load More Button */}
           <div className="text-center">
             <Button size="lg" variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
               Load More Articles
