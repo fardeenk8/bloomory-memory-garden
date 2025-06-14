@@ -29,7 +29,7 @@ const PlanSelectionModal = ({ isOpen, onClose, selectedPlan }: PlanSelectionModa
     partner: { name: "Partner", price: "$24.99", features: ["10000 photos/year", "200 videos/year", "Partner dashboard", "White-labeled sharing"] }
   };
 
-  const currentPlan = planDetails[selectedPlan as keyof typeof planDetails];
+  const currentPlan = planDetails[selectedPlan as keyof typeof planDetails] || planDetails.freemium;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
