@@ -1,10 +1,43 @@
 
-import { Heart, Mail, MapPin, Phone } from "lucide-react";
+import { Heart, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Newsletter subscription for:", email);
+    setEmail("");
+    // Add newsletter subscription logic here
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4">
+        {/* Newsletter Subscription */}
+        <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 mb-12 text-center">
+          <h3 className="text-2xl font-bold mb-4">Stay Updated with BloomoryAI</h3>
+          <p className="text-purple-100 mb-6 max-w-2xl mx-auto">
+            Get the latest updates on new features, memory management tips, and exclusive offers.
+          </p>
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+              required
+            />
+            <Button type="submit" className="bg-white text-purple-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold">
+              Subscribe
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </form>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
@@ -38,11 +71,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Product</h3>
             <ul className="space-y-3 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="/personal" className="hover:text-white transition-colors">Personal Features</a></li>
+              <li><a href="/partners" className="hover:text-white transition-colors">Partner Tools</a></li>
+              <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
               <li><a href="#" className="hover:text-white transition-colors">API</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
             </ul>
           </div>
           
