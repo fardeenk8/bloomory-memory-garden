@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, MessageCircle, Users, Wrench, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, Users, Wrench, Loader2, Instagram, Linkedin, Facebook, Twitter } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -109,6 +108,13 @@ const ContactUs = () => {
     { value: "general", label: "General Inquiry", icon: MessageCircle },
     { value: "partnership", label: "Partnership", icon: Users },
     { value: "support", label: "Technical Support", icon: Wrench }
+  ];
+
+  const socialLinks = [
+    { name: "Facebook", icon: Facebook, href: "https://facebook.com/bloomoryai" },
+    { name: "Twitter", icon: Twitter, href: "https://twitter.com/bloomoryai" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/bloomoryai/" },
+    { name: "Instagram", icon: Instagram, href: "https://instagram.com/bloomoryai" }
   ];
 
   return (
@@ -293,22 +299,18 @@ const ContactUs = () => {
                   Connect with us
                 </h3>
                 <div className="flex space-x-4">
-                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
-                    <span className="sr-only">Facebook</span>
-                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
-                  </div>
-                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
-                    <span className="sr-only">Twitter</span>
-                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
-                  </div>
-                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
-                    <span className="sr-only">LinkedIn</span>
-                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
-                  </div>
-                  <div className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors">
-                    <span className="sr-only">Instagram</span>
-                    <div className="w-5 h-5 bg-gray-600 rounded"></div>
-                  </div>
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors"
+                      aria-label={social.name}
+                    >
+                      <social.icon className="w-5 h-5 text-gray-600" />
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
