@@ -2,20 +2,22 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Check, Star, Zap, Crown, Camera, Film, Users } from "lucide-react";
+import { Check, Star, Zap, Crown, Camera, Film, Users, DollarSign, IndianRupee } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import PlanSelectionModal from "@/components/PlanSelectionModal";
 import { useState } from "react";
 
 const PricingPage = () => {
   const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
+  const [isINR, setIsINR] = useState(false);
 
   const handlePlanSelection = (planType: string) => {
     setSelectedPlan(planType);
     setIsPlanModalOpen(true);
   };
 
-  const plans = [
+  const usdPlans = [
     {
       name: "Freemium",
       price: "$0",
@@ -78,7 +80,70 @@ const PricingPage = () => {
     }
   ];
 
-  const comparisonFeatures = [
+  const inrPlans = [
+    {
+      name: "Freemium",
+      price: "₹0",
+      period: "year",
+      description: "Anyone — individuals or potential partners just getting started",
+      icon: Star,
+      features: [
+        "Full access to all personal features",
+        "Mobile app & secure cloud backup",
+        "1000 photos / year",
+        "10 high-quality videos / year",
+        "Limited storage only"
+      ],
+      limitations: ["Limited storage only"],
+      cta: "Get Started Free",
+      popular: false,
+      planType: "freemium"
+    },
+    {
+      name: "Personal",
+      price: "₹499 + GST",
+      period: "year",
+      description: "Individuals, families, and creators who want smart tools and generous storage",
+      icon: Zap,
+      features: [
+        "All Freemium features",
+        "AI photo/video editing tools",
+        "Password-protected & QR album sharing",
+        "Event planning toolkit",
+        "Auto-tagging, face search, smart organizing",
+        "End-to-end encrypted cloud backup",
+        "5000 photos / year",
+        "200 high-quality videos / year"
+      ],
+      cta: "Choose Personal",
+      popular: true,
+      badge: "Perfect for preserving your family and life memories beautifully",
+      planType: "personal"
+    },
+    {
+      name: "Partner",
+      price: "₹1999 + GST",
+      period: "year",
+      description: "Studios, event planners, vendors, schools, and other professionals",
+      icon: Crown,
+      features: [
+        "All Personal + Partner features",
+        "Partner dashboard & service listings",
+        "Booking and payment integration",
+        "Ratings, reviews, and white-labeled delivery",
+        "Vendor marketplace profile",
+        "Full event memory toolkit for your clients",
+        "10000 photos / year",
+        "200 high-quality videos / year"
+      ],
+      cta: "Go Professional",
+      popular: false,
+      badge: "Build and manage your service business with powerful AI tools",
+      planType: "partner"
+    }
+  ];
+
+  const usdComparison = [
     { name: "AI Photo/Video Storage", freemium: true, personal: true, partner: true },
     { name: "Mobile App Support", freemium: true, personal: true, partner: true },
     { name: "AI Editing & Filters", freemium: true, personal: true, partner: true },
@@ -91,6 +156,22 @@ const PricingPage = () => {
     { name: "Yearly Price", freemium: "$0", personal: "$6.99", partner: "$24.99" }
   ];
 
+  const inrComparison = [
+    { name: "AI Photo/Video Storage", freemium: true, personal: true, partner: true },
+    { name: "Mobile App Support", freemium: true, personal: true, partner: true },
+    { name: "AI Editing & Filters", freemium: true, personal: true, partner: true },
+    { name: "Event Planning Toolkit", freemium: true, personal: true, partner: true },
+    { name: "Partner Tools & Marketplace", freemium: false, personal: false, partner: true },
+    { name: "Booking & Payment Integration", freemium: false, personal: false, partner: true },
+    { name: "White-Labeled Sharing", freemium: false, personal: false, partner: true },
+    { name: "Storage – Photos", freemium: "1000", personal: "5000", partner: "10000" },
+    { name: "Storage – Videos", freemium: "10", personal: "200", partner: "200" },
+    { name: "Yearly Price", freemium: "₹0", personal: "₹499 + GST", partner: "₹1999 + GST" }
+  ];
+
+  const plans = isINR ? inrPlans : usdPlans;
+  const comparisonFeatures = isINR ? inrComparison : usdComparison;
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -99,11 +180,30 @@ const PricingPage = () => {
       <section className="pt-24 pb-16 bg-gradient-to-br from-gray-900 to-purple-900 text-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            BloomoryAI Global Plans
+            BloomoryAI {isINR ? 'India' : 'Global'} Plans
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
             All plans are billed yearly. Start free and upgrade anytime as your needs grow.
           </p>
+          
+          {/* Currency Toggle */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md rounded-full p-2">
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${!isINR ? 'bg-white/20 text-white' : 'text-gray-300'}`}>
+                <DollarSign className="w-4 h-4" />
+                <span className="font-medium">USD</span>
+              </div>
+              <Switch
+                checked={isINR}
+                onCheckedChange={setIsINR}
+                className="data-[state=checked]:bg-purple-600"
+              />
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${isINR ? 'bg-white/20 text-white' : 'text-gray-300'}`}>
+                <IndianRupee className="w-4 h-4" />
+                <span className="font-medium">INR</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -187,13 +287,13 @@ const PricingPage = () => {
                     <th className="px-6 py-4 text-center text-sm font-semibold text-purple-600">
                       <div className="flex items-center justify-center">
                         <Zap className="w-4 h-4 mr-2" />
-                        Personal ($6.99/yr)
+                        Personal ({isINR ? '₹499 + GST/yr' : '$6.99/yr'})
                       </div>
                     </th>
                     <th className="px-6 py-4 text-center text-sm font-semibold text-gray-900">
                       <div className="flex items-center justify-center">
                         <Crown className="w-4 h-4 mr-2" />
-                        Partner ($24.99/yr)
+                        Partner ({isINR ? '₹1999 + GST/yr' : '$24.99/yr'})
                       </div>
                     </th>
                   </tr>
