@@ -1,9 +1,9 @@
-
 import { useParams, Link, useNavigate } from "react-router-dom";
 import blogPosts from "@/data/blogPosts";
 import { Calendar, User, Clock, ArrowLeft, Share2 } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import NewsletterSubscription from "@/components/NewsletterSubscription";
 import React, { useEffect } from "react";
 
 // Social share links generator
@@ -101,6 +101,18 @@ const BlogPost = () => {
             className="prose prose-lg max-w-none text-gray-800"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
+
+          {/* Only one Newsletter section */}
+          <section className="my-12 border rounded-xl bg-gray-50 p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-800">Subscribe for Daily Updates</h2>
+              <p className="text-gray-500 mt-1 text-sm">
+                Get the latest memory-keeping inspiration, personal stories, and digital legacy tips delivered straight to your inbox.
+              </p>
+            </div>
+            {/* NewsletterSubscription form: only render once */}
+            <NewsletterSubscription className="w-full sm:w-auto mt-4 sm:mt-0" />
+          </section>
 
           {/* Social sharing */}
           <div className="mt-12 flex items-center space-x-4">
