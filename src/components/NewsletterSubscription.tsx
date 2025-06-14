@@ -100,11 +100,11 @@ const NewsletterSubscription = ({
         onChange={(e) => setEmail(e.target.value)}
         placeholder={placeholder}
         className="flex-1"
-        disabled={isLoading || isSubscribed}
+        disabled={isLoading}
       />
       <Button 
         type="submit" 
-        disabled={isLoading || isSubscribed}
+        disabled={isLoading || !email.trim()}
         className="bg-white text-purple-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold"
       >
         {isLoading ? (
