@@ -3,8 +3,12 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Users, DollarSign, Star, MessageCircle, Share2, CheckSquare, Calendar, UserPlus, Bell, Camera, Film, PartyPopper, Gift, GraduationCap, BarChart3, CreditCard, Shield } from "lucide-react";
+import PartnerRegistrationModal from "@/components/PartnerRegistrationModal";
+import { useState } from "react";
 
 const Partners = () => {
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+
   const whyPartnerReasons = [
     "Reach thousands of memory-conscious users actively planning events",
     "Get discovered in a curated marketplace",
@@ -57,7 +61,11 @@ const Partners = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Convert potential vendors and service providers into BloomoryAI Partners with powerful business tools and a curated marketplace.
           </p>
-          <Button size="lg" className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-8 py-4 rounded-full text-lg">
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-8 py-4 rounded-full text-lg"
+            onClick={() => setIsPartnerModalOpen(true)}
+          >
             Join as a Partner Today
           </Button>
         </div>
@@ -148,13 +156,19 @@ const Partners = () => {
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Your dashboard, your services, your branding — powered by BloomoryAI's smart memory platform.
           </p>
-          <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 px-10 py-4 rounded-full text-lg font-semibold">
+          <Button
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-blue-50 px-10 py-4 rounded-full text-lg font-semibold"
+            onClick={() => setIsPartnerModalOpen(true)}
+          >
             Join as a Partner Today
           </Button>
         </div>
       </section>
 
       <Footer />
+      {/* Partner Registration Modal */}
+      <PartnerRegistrationModal isOpen={isPartnerModalOpen} onClose={() => setIsPartnerModalOpen(false)} />
     </div>
   );
 };
