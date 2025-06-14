@@ -112,7 +112,7 @@ const ContactUs = () => {
 
   const socialLinks = [
     { name: "Facebook", icon: Facebook, href: "https://facebook.com/bloomoryai" },
-    { name: "Twitter", icon: X, href: "https://twitter.com/bloomoryai" },
+    { name: "Twitter", icon: "custom-x", href: "https://twitter.com/bloomoryai" },
     { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/bloomoryai/" },
     { name: "Instagram", icon: Instagram, href: "https://instagram.com/bloomoryai" }
   ];
@@ -308,7 +308,17 @@ const ContactUs = () => {
                       className="bg-gray-100 hover:bg-gray-200 w-10 h-10 rounded-lg flex items-center justify-center cursor-pointer transition-colors"
                       aria-label={social.name}
                     >
-                      <social.icon className="w-5 h-5 text-gray-600" />
+                      {social.icon === "custom-x" ? (
+                        <img
+                          src="/lovable-uploads/2c00163b-f2d8-44f2-a7b8-98d16f845796.png"
+                          alt="X"
+                          className="w-5 h-5 object-contain"
+                          style={{ filter: 'contrast(1.1) brightness(0.92)' }}
+                        />
+                      ) : (
+                        // @ts-ignore: If icon isn't a string, render it as a Lucide icon component
+                        <social.icon className="w-5 h-5 text-gray-600" />
+                      )}
                     </a>
                   ))}
                 </div>
