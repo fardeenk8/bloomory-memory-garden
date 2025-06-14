@@ -100,14 +100,11 @@ const NewsletterSubscription = ({
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        // Only show placeholder if not focused and not typing
         placeholder={!isFocused && !email ? placeholder : ""}
         className="flex-1 text-black placeholder-gray-400 caret-black"
         disabled={isLoading}
-        autoFocus
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        // The blinking cursor is the default; no extra code needed
       />
       <Button 
         type="submit" 
