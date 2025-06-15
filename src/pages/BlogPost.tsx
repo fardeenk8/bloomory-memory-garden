@@ -1,6 +1,7 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import blogPosts from "@/data/blogPosts";
-import { Calendar, User, Clock, ArrowLeft, Share2 } from "lucide-react";
+
+import { useParams, Link } from "react-router-dom";
+import { getBlogPostBySlug } from "@/data/blogPosts";
+import { Calendar, User, Clock, ArrowLeft } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import NewsletterSubscription from "@/components/NewsletterSubscription";
@@ -31,8 +32,7 @@ const socialPlatforms = [
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const post = blogPosts.find(p => p.slug === slug);
+  const post = slug ? getBlogPostBySlug(slug) : undefined;
 
   useEffect(() => {
     if (post && post.seo?.title) {
@@ -102,7 +102,7 @@ const BlogPost = () => {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          {/* Only one Newsletter section */}
+          {/* Newsletter section */}
           <section className="my-12 border rounded-xl bg-gray-50 p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <h2 className="text-lg font-semibold text-gray-800">Subscribe for Daily Updates</h2>

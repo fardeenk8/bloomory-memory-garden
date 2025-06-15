@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from '@/components/ui/use-toast';
-import blogPosts, { BlogPost } from '@/data/blogPosts';
+import { BlogPost, addBlogPost, getAllSlugs } from '@/data/blogPosts';
 import { generateUniqueSlug } from '@/utils/slugify';
 
 export interface BlogPostFormData {
@@ -18,6 +19,7 @@ export interface BlogPostFormData {
 export const useBlogPost = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDraft, setIsDraft] = useState(false);
+  const navigate = useNavigate();
 
   const validateForm = (formData: BlogPostFormData): string[] => {
     const errors: string[] = [];
@@ -36,7 +38,7 @@ export const useBlogPost = () => {
   };
 
   const generateSlugFromTitle = (title: string): string => {
-    const existingSlugs = blogPosts.map(post => post.slug);
+    const existingSlugs = getAllSlugs();
     return generateUniqueSlug(title, existingSlugs);
   };
 
@@ -68,7 +70,7 @@ export const useBlogPost = () => {
           name: formData.author,
         },
         date: formData.publishDate,
-        readTime: `${Math.ceil(formData.content.length / 1000)} min read`,
+        readTime: `${Math.ceil(formData.content.replace(/<[^>]*>/g, '').length / 1000)} min read`,
         image: formData.coverImage,
         category: formData.tags[0] || 'General',
         tags: formData.tags,
@@ -82,8 +84,11 @@ export const useBlogPost = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // In a real app, you would save to your backend/CMS here
-      console.log('Saving blog post:', newBlogPost);
+      // Add the post to our blog data if not a draft
+      if (!asDraft) {
+        addBlogPost(newBlogPost);
+        console.log('Blog post added to data:', newBlogPost);
+      }
       
       toast({
         title: asDraft ? "✅ Draft saved!" : "✅ Blog post published!",
@@ -91,6 +96,13 @@ export const useBlogPost = () => {
           ? "Your draft has been saved successfully" 
           : "Your blog post has been published and is now live"
       });
+
+      // Redirect to the blog page after successful publish
+      if (!asDraft) {
+        setTimeout(() => {
+          navigate('/blog');
+        }, 2000);
+      }
       
       return true;
     } catch (error) {

@@ -22,8 +22,8 @@ export interface BlogPost {
   };
 }
 
-// For demo, using a subset of posts from Blog.tsx with example content.
-const blogPosts: BlogPost[] = [
+// In-memory blog posts storage (in a real app, this would be in a database)
+let blogPosts: BlogPost[] = [
   {
     slug: "future-of-ai-powered-memory-preservation",
     title: "The Future of AI-Powered Memory Preservation: What's Coming in 2025",
@@ -38,9 +38,9 @@ const blogPosts: BlogPost[] = [
         <li><strong>AI-Guided Memory Curation:</strong> Create beautiful stories from scattered moments.</li>
         <li><strong>Voice & Video Narration:</strong> Attach personal voice notes or video to your albums.</li>
       </ul>
-      <blockquote>“AI isn’t just about automation—it’s about making our connections to the past richer and more meaningful.”</blockquote>
+      <blockquote>"AI isn't just about automation—it's about making our connections to the past richer and more meaningful."</blockquote>
       <h3>Conclusion</h3>
-      <p>With 2025 on the horizon, BloomoryAI’s innovations will make reliving and sharing memories easier and more joyful than ever before. Stay tuned for updates!</p>
+      <p>With 2025 on the horizon, BloomoryAI's innovations will make reliving and sharing memories easier and more joyful than ever before. Stay tuned for updates!</p>
       <p>
         <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
         title="Product Demo" frameborder="0" allowfullscreen class="my-6"></iframe>
@@ -85,8 +85,23 @@ const blogPosts: BlogPost[] = [
       keywords: ["Holidays", "Memories", "Family", "AI"]
     }
   },
-  // Add more full posts as needed, matching slugs with category, etc.
 ];
 
-export default blogPosts;
+// Functions to manage blog posts
+export const getAllBlogPosts = (): BlogPost[] => {
+  return [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+};
 
+export const addBlogPost = (newPost: BlogPost): void => {
+  blogPosts.unshift(newPost); // Add to beginning for latest first
+};
+
+export const getBlogPostBySlug = (slug: string): BlogPost | undefined => {
+  return blogPosts.find(post => post.slug === slug);
+};
+
+export const getAllSlugs = (): string[] => {
+  return blogPosts.map(post => post.slug);
+};
+
+export default blogPosts;

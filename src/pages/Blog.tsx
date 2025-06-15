@@ -6,12 +6,15 @@ import BlogHero from "@/components/blog/BlogHero";
 import FeaturedPost from "@/components/blog/FeaturedPost";
 import BlogGrid from "@/components/blog/BlogGrid";
 import NewsletterSection from "@/components/blog/NewsletterSection";
-import blogPosts from "@/data/blogPosts";
+import { getAllBlogPosts } from "@/data/blogPosts";
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [visiblePosts, setVisiblePosts] = useState(6);
 
+  // Get fresh blog posts data
+  const blogPosts = getAllBlogPosts();
+  
   const filteredPosts = activeCategory === "All" 
     ? blogPosts 
     : blogPosts.filter(post => post.category === activeCategory);
