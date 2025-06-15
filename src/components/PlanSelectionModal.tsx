@@ -16,7 +16,9 @@ interface PlanSelectionModalProps {
 const PlanSelectionModal = ({ isOpen, onClose, selectedPlan }: PlanSelectionModalProps) => {
   const [formData, setFormData] = useState({
     name: "",
+    username: "",
     email: "",
+    phone: "",
     password: "",
     confirmPassword: ""
   });
@@ -74,7 +76,7 @@ const PlanSelectionModal = ({ isOpen, onClose, selectedPlan }: PlanSelectionModa
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
             Join BloomoryAI
@@ -109,12 +111,37 @@ const PlanSelectionModal = ({ isOpen, onClose, selectedPlan }: PlanSelectionModa
           </div>
 
           <div>
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              required
+              className="mt-1"
+            />
+          </div>
+
+          <div>
             <Label htmlFor="email">Email Address</Label>
             <Input
               id="email"
               name="email"
               type="email"
               value={formData.email}
+              onChange={handleInputChange}
+              required
+              className="mt-1"
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="phone">Phone/Mobile Number</Label>
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              value={formData.phone}
               onChange={handleInputChange}
               required
               className="mt-1"
