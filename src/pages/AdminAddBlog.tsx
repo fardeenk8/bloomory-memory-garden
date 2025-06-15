@@ -21,13 +21,13 @@ const AdminAddBlog: React.FC = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Navigation />
-        <div className="flex-1 flex items-center justify-center bg-gray-50">
-          <div className="text-center p-8">
-            <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-            <p className="text-gray-600 mb-4">You need admin privileges to access this page.</p>
+        <div className="flex-1 flex items-center justify-center bg-gray-50 px-4">
+          <div className="text-center p-4 sm:p-8 max-w-md mx-auto">
+            <Shield className="w-12 h-12 sm:w-16 sm:h-16 text-red-500 mx-auto mb-4" />
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
+            <p className="text-gray-600 mb-4 text-sm sm:text-base">You need admin privileges to access this page.</p>
             <Link to="/blog">
-              <Button variant="outline">
+              <Button variant="outline" className="w-full sm:w-auto">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Blog
               </Button>
@@ -44,18 +44,18 @@ const AdminAddBlog: React.FC = () => {
       <Navigation />
       
       {/* Admin Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-8 mt-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between">
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-6 sm:py-8 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center space-x-4">
-              <Shield className="w-8 h-8" />
+              <Shield className="w-6 h-6 sm:w-8 sm:h-8" />
               <div>
-                <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-                <p className="text-purple-100">Blog Content Management</p>
+                <h1 className="text-xl sm:text-2xl font-bold">Admin Dashboard</h1>
+                <p className="text-purple-100 text-sm sm:text-base">Blog Content Management</p>
               </div>
             </div>
             <Link to="/blog">
-              <Button variant="outline" className="bg-white text-purple-600 hover:bg-gray-100">
+              <Button variant="outline" className="bg-white text-purple-600 hover:bg-gray-100 w-full sm:w-auto">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Blog
               </Button>
@@ -65,10 +65,8 @@ const AdminAddBlog: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="py-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <BlogPostForm />
-        </div>
+      <div className="py-6 sm:py-8">
+        <BlogPostForm />
       </div>
 
       <Footer />

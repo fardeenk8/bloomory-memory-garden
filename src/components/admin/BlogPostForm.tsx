@@ -65,39 +65,39 @@ const BlogPostForm: React.FC = () => {
 
   if (isPreview) {
     return (
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Preview Mode</h1>
-          <Button onClick={() => setIsPreview(false)} variant="outline">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+          <h1 className="text-xl sm:text-2xl font-bold">Preview Mode</h1>
+          <Button onClick={() => setIsPreview(false)} variant="outline" className="w-full sm:w-auto">
             <Eye className="w-4 h-4 mr-2" />
             Exit Preview
           </Button>
         </div>
         
         <Card>
-          <CardContent className="p-8">
+          <CardContent className="p-4 sm:p-8">
             {formData.coverImage && (
               <img
                 src={formData.coverImage}
                 alt={formData.title}
-                className="w-full h-64 object-cover rounded-lg mb-6"
+                className="w-full h-48 sm:h-64 object-cover rounded-lg mb-6"
               />
             )}
-            <h1 className="text-3xl font-bold mb-4">{formData.title || 'Untitled Post'}</h1>
-            <div className="flex items-center space-x-4 text-sm text-gray-500 mb-6">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-4">{formData.title || 'Untitled Post'}</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-sm text-gray-500 mb-6 gap-2 sm:gap-0">
               <span>By {formData.author}</span>
-              <span>•</span>
+              <span className="hidden sm:inline">•</span>
               <span>{formData.publishDate}</span>
               {formData.tags.length > 0 && (
                 <>
-                  <span>•</span>
+                  <span className="hidden sm:inline">•</span>
                   <span>{formData.tags.join(', ')}</span>
                 </>
               )}
             </div>
-            <p className="text-lg text-gray-600 mb-6 italic">{formData.excerpt}</p>
+            <p className="text-base sm:text-lg text-gray-600 mb-6 italic">{formData.excerpt}</p>
             <div 
-              className="prose prose-lg max-w-none"
+              className="prose prose-sm sm:prose-lg max-w-none"
               dangerouslySetInnerHTML={{ __html: formData.content }}
             />
           </CardContent>
@@ -107,15 +107,16 @@ const BlogPostForm: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-7xl mx-auto space-y-6 px-4 sm:px-6">
       {/* Header Actions */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Create New Blog Post</h1>
-        <div className="flex space-x-2">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Create New Blog Post</h1>
+        <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2 sm:gap-0">
           <Button
             onClick={() => setIsPreview(true)}
             variant="outline"
             disabled={!formData.title}
+            className="w-full sm:w-auto"
           >
             <Eye className="w-4 h-4 mr-2" />
             Preview
@@ -124,6 +125,7 @@ const BlogPostForm: React.FC = () => {
             onClick={() => handleSubmit(true)}
             variant="outline"
             disabled={isSubmitting}
+            className="w-full sm:w-auto"
           >
             <Save className="w-4 h-4 mr-2" />
             {isDraft ? 'Saving...' : 'Save Draft'}
@@ -131,7 +133,7 @@ const BlogPostForm: React.FC = () => {
           <Button
             onClick={() => handleSubmit(false)}
             disabled={isSubmitting || !formData.title || !formData.content}
-            className="bg-gradient-to-r from-pink-500 to-purple-600"
+            className="bg-gradient-to-r from-pink-500 to-purple-600 w-full sm:w-auto"
           >
             <Send className="w-4 h-4 mr-2" />
             {isSubmitting ? 'Publishing...' : 'Publish'}
@@ -140,14 +142,14 @@ const BlogPostForm: React.FC = () => {
       </div>
 
       {/* Main Form */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Content Section */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="xl:col-span-2 space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Post Details</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Post Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-4 sm:p-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Blog Title *
@@ -156,7 +158,7 @@ const BlogPostForm: React.FC = () => {
                   value={formData.title}
                   onChange={(e) => handleInputChange('title', e.target.value)}
                   placeholder="Enter your blog post title..."
-                  className="text-lg"
+                  className="text-base sm:text-lg"
                 />
               </div>
 
@@ -170,7 +172,7 @@ const BlogPostForm: React.FC = () => {
                   placeholder="auto-generated-from-title"
                   className="font-mono text-sm"
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 mt-1 break-all">
                   This will be the URL: /blog/{formData.slug}
                 </p>
               </div>
@@ -185,6 +187,7 @@ const BlogPostForm: React.FC = () => {
                   placeholder="Write a compelling summary of your blog post..."
                   maxLength={200}
                   rows={3}
+                  className="resize-none"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   {formData.excerpt.length}/200 characters
@@ -194,7 +197,7 @@ const BlogPostForm: React.FC = () => {
           </Card>
 
           <Card>
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <RichTextEditor
                 value={formData.content}
                 onChange={(content) => handleInputChange('content', content)}
@@ -207,9 +210,9 @@ const BlogPostForm: React.FC = () => {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Publishing</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Publishing</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-4 sm:p-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Author Name *
