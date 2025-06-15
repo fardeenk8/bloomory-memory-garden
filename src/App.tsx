@@ -18,29 +18,31 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<NewIndex />} />
-          <Route path="/personal" element={<Personal />} />
-          <Route path="/partners" element={<Partners />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/admin/add-blog" element={<AdminAddBlog />} />
-          <Route path="/contact" element={<ContactUs />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider delayDuration={0}>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<NewIndex />} />
+            <Route path="/personal" element={<Personal />} />
+            <Route path="/partners" element={<Partners />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/admin/add-blog" element={<AdminAddBlog />} />
+            <Route path="/contact" element={<ContactUs />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
