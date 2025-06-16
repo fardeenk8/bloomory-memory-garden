@@ -12,13 +12,6 @@ const Personal = () => {
     { icon: Copy, title: "Duplicate/Similar Image Detection", description: "Prevent clutter by detecting and sorting out near-identical media." }
   ];
 
-  const editingFeatures = [
-    { icon: Edit, title: "AI Photo Editing Tools", description: "Smart enhancement, blemish removal, filters." },
-    { icon: Camera, title: "AI Image Filters", description: "Beautify and apply mood-based or theme filters." },
-    { icon: Users, title: "AI-Based Background Removal", description: "Remove cluttered or unwanted backgrounds." },
-    { icon: Film, title: "Video Editing – Reels", description: "Quickly create highlight videos from photos/videos." }
-  ];
-
   const sharingFeatures = [
     { icon: QrCode, title: "Event-Based Sharing with QR Codes", description: "Share albums via QR at weddings, parties, etc." },
     { icon: Share2, title: "Album Sharing with Friends & Family", description: "Share password-protected or public links." },
@@ -34,6 +27,13 @@ const Personal = () => {
     { icon: Eye, title: "Nudity Detection", description: "AI scan to ensure family-safe content." },
     { icon: AlertTriangle, title: "Report Inappropriate Content", description: "Allow users to flag content." },
     { icon: Shield, title: "Safe Environment Tools", description: "Controls and filters to promote safe sharing." }
+  ];
+
+  const editingFeatures = [
+    { icon: Edit, title: "AI Photo Editing Tools", description: "Smart enhancement, blemish removal, filters." },
+    { icon: Camera, title: "AI Image Filters", description: "Beautify and apply mood-based or theme filters." },
+    { icon: Users, title: "AI-Based Background Removal", description: "Remove cluttered or unwanted backgrounds." },
+    { icon: Film, title: "Video Editing – Reels", description: "Quickly create highlight videos from photos/videos." }
   ];
 
   const eventFeatures = [
@@ -94,12 +94,6 @@ const Personal = () => {
         features={aiFeatures}
       />
 
-      <FeatureSection
-        title="🎨 Photo & Video Editing"
-        subtitle="Professional-grade editing tools powered by AI"
-        features={editingFeatures}
-        bgColor="bg-gray-50"
-      />
 
       <FeatureSection
         title="📲 Sharing & Collaboration"
@@ -111,6 +105,13 @@ const Personal = () => {
         title="🛡️ Privacy & Safety"
         subtitle="Your memories are protected with enterprise-grade security"
         features={privacyFeatures}
+        bgColor="bg-gray-50"
+      />
+
+      <FeatureSection
+        title="🎨 Photo & Video Editing"
+        subtitle="Professional-grade editing tools powered by AI"
+        features={editingFeatures}
         bgColor="bg-gray-50"
       />
 

@@ -1,144 +1,136 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Calendar, User, Tag, Clock } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useParams, Link } from "react-router-dom";
-import { getBlogPostBySlug } from "@/data/blogPosts";
-import { Calendar, User, Clock, ArrowLeft } from "lucide-react";
-import Footer from "@/components/Footer";
-import Navigation from "@/components/Navigation";
-import NewsletterSubscription from "@/components/NewsletterSubscription";
-import React, { useEffect } from "react";
-
-// Social share links generator
-const getShareUrl = (slug: string) => `${window.location.origin}/blog/${slug}`;
-const socialPlatforms = [
+const blogPosts = [
   {
-    name: "Twitter",
-    url: (url: string, title: string) =>
-      `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
-    icon: "/lovable-uploads/482b840d-6cd0-41d7-aba9-e846bb6daa78.png",
+    title: "5 Ways AI is Revolutionizing Memory Management",
+    slug: "ai-memory-management",
+    date: "December 10, 2024",
+    readTime: "5 min read",
+    excerpt: "Discover how artificial intelligence is changing the way we store, organize, and share our most precious moments.",
+    image: "/assets/blog/ai-cover.jpg",
+    content: `<p>Full blog HTML content here...</p>`,
+    author: { name: "Team BloomoryAI" },
+    category: "AI",
   },
   {
-    name: "LinkedIn",
-    url: (url: string, title: string) =>
-      `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`,
-    icon: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg",
+    title: "Wedding Photography: Delivering Perfect Albums Every Time",
+    slug: "wedding-photography-albums",
+    date: "December 8, 2024",
+    readTime: "7 min read",
+    excerpt: "Learn professional tips for photographers on creating stunning, organized wedding albums that clients will treasure forever.",
+    image: "/assets/blog/wedding-photo.jpg",
+    content: `<p>Full blog HTML content here...</p>`,
+    author: { name: "Team BloomoryAI" },
+    category: "Photography",
   },
   {
-    name: "WhatsApp",
-    url: (url: string, title: string) =>
-      `https://wa.me/?text=${encodeURIComponent(title + " " + url)}`,
-    icon: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg",
+    title: "Event Planning Made Simple with Digital Memory Tools",
+    slug: "event-planning-digital-tools",
+    date: "December 5, 2024",
+    readTime: "4 min read",
+    excerpt: "How modern event planners are using digital memory platforms to enhance client experience and streamline their workflow.",
+    image: "/assets/blog/event-tools.jpg",
+    content: `<p>Full blog HTML content here...</p>`,
+    author: { name: "Team BloomoryAI" },
+    category: "Event Planning",
   },
 ];
 
-const BlogPost = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const post = slug ? getBlogPostBySlug(slug) : undefined;
+const BlogGrid = ({ posts = blogPosts, hasMorePosts, onLoadMore }) => {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (post && post.seo?.title) {
-      document.title = post.seo.title;
+  const handleAdminAccess = () => {
+    const password = prompt("Enter admin password to continue:");
+    if (password === "bloomory@admin") {
+      navigate("/admin/add-blog");
+    } else if (password !== null) {
+      alert("Incorrect password. Access denied.");
     }
-    if (post && post.seo?.description) {
-      const meta = document.querySelector('meta[name="description"]');
-      if (meta) {
-        meta.setAttribute('content', post.seo.description);
-      } else {
-        const tag = document.createElement('meta');
-        tag.name = "description";
-        tag.content = post.seo.description;
-        document.head.appendChild(tag);
-      }
-    }
-  }, [post]);
-
-  if (!post) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Navigation />
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold mb-4">404 - Post Not Found</h1>
-            <Link to="/blog" className="underline text-purple-600">Back to Blog</Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
-  const shareUrl = getShareUrl(post.slug);
+  };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <Navigation />
-      <main className="flex-1">
-        <div className="max-w-3xl mx-auto px-4 py-16">
-          {/* Featured image */}
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full rounded-lg max-h-96 object-cover mb-8"
-            loading="lazy"
-          />
-
-          {/* Post meta */}
-          <div className="mb-6 flex items-center justify-between flex-wrap gap-2">
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
-              <span className="flex items-center"><User className="w-4 h-4 mr-1" />{post.author?.name}</span>
-              <span className="flex items-center"><Calendar className="w-4 h-4 mr-1" />{post.date}</span>
-              <span className="flex items-center"><Clock className="w-4 h-4 mr-1" />{post.readTime}</span>
-            </div>
-            <Link to="/blog" className="text-purple-600 hover:underline flex items-center">
-              <ArrowLeft className="w-4 h-4 mr-1" /> Back to Blog
-            </Link>
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="mb-6 flex justify-between items-center">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-1">Latest Articles</h2>
+            <p className="text-gray-600">Stay updated with the latest insights and tips</p>
           </div>
-
-          {/* Title */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">{post.title}</h1>
-
-          {/* Rich HTML content */}
-          <article
-            className="prose prose-lg max-w-none text-gray-800"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-
-          {/* Newsletter section */}
-          <section className="my-12 border rounded-xl bg-gray-50 p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div>
-              <h2 className="text-lg font-semibold text-gray-800">Subscribe for Daily Updates</h2>
-              <p className="text-gray-500 mt-1 text-sm">
-                Get the latest memory-keeping inspiration, personal stories, and digital legacy tips delivered straight to your inbox.
-              </p>
-            </div>
-            <NewsletterSubscription className="w-full sm:w-auto mt-4 sm:mt-0" />
-          </section>
-
-          {/* Social sharing */}
-          <div className="mt-12 flex items-center space-x-4">
-            <span className="font-semibold text-gray-700">Share:</span>
-            {socialPlatforms.map(platform => (
-              <a
-                key={platform.name}
-                href={platform.url(shareUrl, post.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full border hover:bg-gray-100 flex items-center"
-                aria-label={platform.name}
-              >
-                <img
-                  src={platform.icon}
-                  alt={platform.name}
-                  className="w-5 h-5"
-                  loading="lazy"
-                />
-              </a>
-            ))}
-          </div>
+          <Button
+            onClick={handleAdminAccess}
+            className="bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium px-4 py-2 rounded-md"
+          >
+            + Create Blog Post
+          </Button>
         </div>
-      </main>
-      <Footer />
-    </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {posts.map((post, index) => (
+            <Card key={post.slug} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <Link to={`/blog/${post.slug}`} className="block">
+                <div className="relative">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-48 object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <div className="flex items-center bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full">
+                      <Tag className="w-3 h-3 text-purple-600 mr-1" />
+                      <span className="text-purple-600 font-medium text-xs">{post.category}</span>
+                    </div>
+                  </div>
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-purple-700 transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4 line-clamp-3">
+                    {post.excerpt.substring(0, 150)}{post.excerpt.length > 150 ? "..." : ""}
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <div className="flex items-center">
+                      <User className="w-3 h-3 mr-1" />
+                      {post.author.name}
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="w-3 h-3 mr-1" />
+                      {post.readTime}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-sm text-gray-500">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      {post.date}
+                    </div>
+                    <span className="text-purple-600 hover:underline text-sm">Read More</span>
+                  </div>
+                </CardContent>
+              </Link>
+            </Card>
+          ))}
+        </div>
+
+        {hasMorePosts && (
+          <div className="text-center">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-purple-200 text-purple-600 hover:bg-purple-50"
+              onClick={onLoadMore}
+            >
+              Load More Articles
+            </Button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 
-export default BlogPost;
+export default BlogGrid;

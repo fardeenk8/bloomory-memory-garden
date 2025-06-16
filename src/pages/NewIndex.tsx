@@ -5,7 +5,9 @@ import Footer from "@/components/Footer";
 import PartnerRegistrationModal from "@/components/PartnerRegistrationModal";
 import PlanSelectionModal from "@/components/PlanSelectionModal";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BlogPost } from "@/data/blogPosts";
+
 
 const NewIndex = () => {
   const navigate = useNavigate();
@@ -52,19 +54,25 @@ const NewIndex = () => {
       title: "5 Ways AI is Revolutionizing Memory Management",
       excerpt: "Discover how artificial intelligence is changing the way we store, organize, and share our most precious moments.",
       date: "December 10, 2024",
-      readTime: "5 min read"
+      readTime: "5 min read",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      slug: "ai-memory-management"
     },
     {
       title: "Wedding Photography: Delivering Perfect Albums Every Time",
       excerpt: "Learn professional tips for photographers on creating stunning, organized wedding albums that clients will treasure forever.",
       date: "December 8, 2024",
-      readTime: "7 min read"
+      readTime: "7 min read",
+      image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
+      slug: "wedding-photography-albums"
     },
     {
       title: "Event Planning Made Simple with Digital Memory Tools",
       excerpt: "How modern event planners are using digital memory platforms to enhance client experience and streamline their workflow.",
       date: "December 5, 2024",
-      readTime: "4 min read"
+      readTime: "4 min read",
+      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+      slug: "event-planning-digital-tools"
     }
   ];
 
@@ -137,18 +145,19 @@ const NewIndex = () => {
           </div>
           
           {/* Video Demo Preview */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="relative bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl p-1">
-              <div className="bg-black rounded-xl aspect-video flex items-center justify-center">
-                <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm">
-                  <Play className="w-6 h-6 mr-2" />
-                  Watch Demo
-                </Button>
-              </div>
+          <div className="w-full max-w-5xl mx-auto mb-12">
+            <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-xl shadow-xl">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/nA58WW5CQbU"
+                title="Free Family Memories Video - Royalty Free"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
-          </div>
           
-          <div className="flex items-center justify-center space-x-8 text-sm text-gray-300">
+          <div className="mt-9 flex items-center justify-center space-x-8 text-sm text-gray-300">
             <div className="flex items-center">
               <Shield className="w-4 h-4 mr-2 text-green-400" />
               End-to-End Encrypted
@@ -162,6 +171,7 @@ const NewIndex = () => {
               Privacy First
             </div>
           </div>
+        </div>
         </div>
       </section>
 
@@ -237,37 +247,46 @@ const NewIndex = () => {
       </section>
 
       {/* Blog Highlights */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Latest Insights
-            </h2>
-            <p className="text-xl text-gray-600">Stay updated with memory management tips and industry insights</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <article key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-48 bg-gradient-to-br from-purple-400 to-pink-400"></div>
-                <div className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <span>{post.date}</span>
-                    <span className="mx-2">•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{post.title}</h3>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <Button variant="outline" size="sm">
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+<section className="py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Latest Insights
+      </h2>
+      <p className="text-xl text-gray-600">
+        Stay updated with memory management tips and industry insights
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {blogPosts.map((post, index) => (
+          <article key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <img
+              src={post.image}
+              alt={post.title}
+              className="h-48 w-full object-cover"
+            />
+            <div className="p-6">
+              <div className="flex items-center text-sm text-gray-500 mb-3">
+                <span>{post.date}</span>
+                <span className="mx-2">•</span>
+                <span>{post.readTime}</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{post.title}</h3>
+              <p className="text-gray-600 mb-4">{post.excerpt}</p>
+              
+              <Link to={`/blog/${post.slug}`}>
+                <Button variant="outline" size="sm">
+                  Read More
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </article>
+        ))}
+    </div>
+  </div>
+</section>
 
       <Footer />
 

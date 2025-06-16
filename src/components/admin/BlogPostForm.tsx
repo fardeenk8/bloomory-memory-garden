@@ -78,9 +78,10 @@ const BlogPostForm: React.FC = () => {
           <CardContent className="p-4 sm:p-6 lg:p-8">
             {formData.coverImage && (
               <img
-                src={formData.coverImage}
+                src={`${import.meta.env.BASE_URL}${formData.coverImage.startsWith('/') ? formData.coverImage.slice(1) : formData.coverImage}`}
                 alt={formData.title}
                 className="w-full h-48 sm:h-64 object-cover rounded-lg mb-6"
+                onError={(e) => (e.currentTarget.src = '/assets/placeholder.jpg')} // optional fallback
               />
             )}
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">{formData.title || 'Untitled Post'}</h1>
@@ -263,12 +264,41 @@ const BlogPostForm: React.FC = () => {
             </Card>
 
             {/* Image Upload */}
-            <ImageUpload
-              value={formData.coverImage}
-              onChange={(url) => handleInputChange('coverImage', url)}
-              onRemove={() => handleInputChange('coverImage', '')}
-              label="Cover Image *"
-            />
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Cover Image *
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const url = URL.createObjectURL(file);
+                    setFormData(prev => ({ ...prev, coverImage: url }));
+                  }
+                }}
+                className="text-sm"
+              />
+              {formData.coverImage && (
+                <div className="relative mt-2">
+                  <img
+                    src={formData.coverImage}
+                    alt="Preview"
+                    className="w-full h-48 object-cover rounded-md border"
+                    onError={(e) => (e.currentTarget.src = '/assets/placeholder.jpg')}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, coverImage: '' }))}
+                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 text-xs"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+            </div>
+
           </div>
         </div>
       </div>

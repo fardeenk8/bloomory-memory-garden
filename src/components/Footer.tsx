@@ -9,13 +9,13 @@ const Footer = () => {
       { name: "Personal Features", href: "/personal" },
       { name: "Partner Program", href: "/partners" },
       { name: "Pricing", href: "/pricing" },
-      { name: "API Documentation", href: "#" }
+      // { name: "API Documentation", href: "#" }
     ],
     Company: [
       { name: "About Us", href: "/about" },
       { name: "Blog", href: "/blog" },
-      { name: "Careers", href: "#" },
-      { name: "Press Kit", href: "#" }
+      // { name: "Careers", href: "#" },
+      // { name: "Press Kit", href: "#" }
     ],
     Support: [
       { name: "Help Center", href: "#" },
@@ -25,7 +25,7 @@ const Footer = () => {
     ],
     Community: [
       { name: "Testimonials", href: "/testimonials" },
-      { name: "Discord", href: "#" },
+      { name: "Facebook", href: "#" },
       { name: "Twitter", href: "#" },
       { name: "Instagram", href: "#" }
     ]

@@ -6,29 +6,29 @@ import { Heart, Users, Target, Award, Calendar } from "lucide-react";
 const AboutUs = () => {
   const teamMembers = [
     {
-      name: "Sarah Chen",
+      name: "Fardeen Kachawa",
       role: "CEO & Founder",
-      bio: "Former Google AI researcher with 10+ years in computer vision and memory management systems.",
+      bio: "#",
       image: "/placeholder.svg"
     },
-    {
-      name: "Marcus Rodriguez",
-      role: "CTO",
-      bio: "Ex-Apple engineer specializing in mobile AI and secure cloud infrastructure.",
-      image: "/placeholder.svg"
-    },
-    {
-      name: "Emily Watson",
-      role: "Head of Design",
-      bio: "Award-winning UX designer with expertise in creating beautiful, intuitive memory platforms.",
-      image: "/placeholder.svg"
-    },
-    {
-      name: "David Kim",
-      role: "VP of Partnerships",
-      bio: "Former event industry executive helping connect creative professionals with AI technology.",
-      image: "/placeholder.svg"
-    }
+    // {
+    //   name: "Marcus Rodriguez",
+    //   role: "CTO",
+    //   bio: "Ex-Apple engineer specializing in mobile AI and secure cloud infrastructure.",
+    //   image: "/placeholder.svg"
+    // },
+    // {
+    //   name: "Emily Watson",
+    //   role: "Head of Design",
+    //   bio: "Award-winning UX designer with expertise in creating beautiful, intuitive memory platforms.",
+    //   image: "/placeholder.svg"
+    // },
+    // {
+    //   name: "David Kim",
+    //   role: "VP of Partnerships",
+    //   bio: "Former event industry executive helping connect creative professionals with AI technology.",
+    //   image: "/placeholder.svg"
+    // }
   ];
 
   const timeline = [
@@ -148,22 +148,22 @@ const AboutUs = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Meet Our Team
+              About Me
             </h2>
             <p className="text-xl text-gray-600">
-              The passionate minds behind BloomoryAI's innovative platform
+              The passionate mind behind BloomoryAI's innovative platform
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className={`grid ${teamMembers.length === 1 ? 'place-items-center' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'} gap-8`}>
             {teamMembers.map((member, index) => (
               <div key={index} className="text-center group">
-                <div className="relative mb-6">
+                <div className="relative mb-6 flex justify-center items-center">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                    className="w-32 h-32 rounded-full object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-300"
                   />
-                  <div className="absolute inset-0 w-32 h-32 rounded-full mx-auto bg-gradient-to-br from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all duration-300"></div>
+                  <div className="absolute w-32 h-32 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all duration-300"></div>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
                 <p className="text-purple-600 font-medium mb-3">{member.role}</p>
@@ -171,6 +171,7 @@ const AboutUs = () => {
               </div>
             ))}
           </div>
+
         </div>
       </section>
 

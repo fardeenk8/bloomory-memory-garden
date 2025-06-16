@@ -1,4 +1,4 @@
-
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -11,12 +11,13 @@ import { getAllBlogPosts } from "@/data/blogPosts";
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [visiblePosts, setVisiblePosts] = useState(6);
+  const navigate = useNavigate();
 
   // Get fresh blog posts data
   const blogPosts = getAllBlogPosts();
-  
-  const filteredPosts = activeCategory === "All" 
-    ? blogPosts 
+
+  const filteredPosts = activeCategory === "All"
+    ? blogPosts
     : blogPosts.filter(post => post.category === activeCategory);
 
   const displayedPosts = filteredPosts.slice(0, visiblePosts);
@@ -34,21 +35,21 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      
-      <BlogHero 
+
+      <BlogHero
         activeCategory={activeCategory}
         onCategoryChange={handleCategoryChange}
       />
-
+      
       <FeaturedPost />
 
-      <BlogGrid 
+      <BlogGrid
         posts={displayedPosts}
         hasMorePosts={hasMorePosts}
         onLoadMore={handleLoadMore}
       />
 
-      <NewsletterSection />
+      {/* <NewsletterSection /> */}
 
       <Footer />
     </div>
