@@ -11,7 +11,7 @@ const FeaturedPost = () => {
     author: "Sarah Chen",
     date: "March 15, 2024",
     readTime: "8 min read",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=800&q=80",
     category: "AI Photography",
     featured: true
   };

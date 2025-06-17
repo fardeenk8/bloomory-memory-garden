@@ -56,15 +56,15 @@ const NewIndex = () => {
       date: "December 10, 2024",
       readTime: "5 min read",
       image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-      slug: "ai-memory-management"
+      slug: "future-of-ai-powered-memory-preservation"
     },
     {
-      title: "Wedding Photography: Delivering Perfect Albums Every Time",
+      title: "10 Creative Ways to Preserve Your Family's Holiday Memories",
       excerpt: "Learn professional tips for photographers on creating stunning, organized wedding albums that clients will treasure forever.",
       date: "December 8, 2024",
       readTime: "7 min read",
       image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
-      slug: "wedding-photography-albums"
+      slug: "creative-ways-to-preserve-holiday-memories"
     },
     {
       title: "Event Planning Made Simple with Digital Memory Tools",
