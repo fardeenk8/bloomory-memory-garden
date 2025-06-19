@@ -7,60 +7,74 @@ import { Star, Quote, Play, Award, Users, Heart } from "lucide-react";
 const Testimonials = () => {
   const personalReviews = [
     {
-      name: "Sarah Johnson",
+      name: "Vikram Iyer",
       role: "Family Memory Keeper",
       image: "/placeholder.svg",
       rating: 5,
       review: "BloomoryAI has completely transformed how our family preserves memories. The AI organization is incredible - it automatically grouped our vacation photos by location and even recognized our kids as they grew up!"
     },
     {
-      name: "Michael Chen",
+      name: "Aanya Joshi",
       role: "Travel Enthusiast",
       image: "/placeholder.svg",
-      rating: 5,
+      rating: 4,
       review: "As someone who takes thousands of photos while traveling, the duplicate detection and smart tagging features are game-changers. I found photos I had forgotten about from years ago!"
     },
     {
-      name: "Lisa Rodriguez",
+      name: "Rhea Kapoor",
       role: "New Mom",
       image: "/placeholder.svg",
       rating: 5,
       review: "The facial recognition feature helped me create the most beautiful timeline of my baby's first year. Every milestone is perfectly organized and easy to share with grandparents."
     },
     {
-      name: "David Park",
+      name: "Dev Patel",
       role: "Photography Hobbyist",
       image: "/placeholder.svg",
       rating: 5,
       review: "The AI editing tools and filters are professional-grade. I love how it enhances my photos while keeping them natural-looking. The background removal feature is fantastic!"
+    },
+    {
+      name: "Priya Mehta",
+      role: "Event Planner",
+      image: "/placeholder.svg",
+      rating: 3.5,
+      review: "BloomoryAI has become my secret weapon for client events. I can create beautiful galleries, tag guests automatically, and even offer personalized albums in minutes. It's made memory delivery as seamless as event execution."
+    },
+    {
+      name: "Ankit Sharma",
+      role: "Wedding Photographer",
+      image: "/placeholder.svg",
+      rating: 4,
+      review: "I’m not very tech-savvy, but BloomoryAI made it so simple to preserve years of family history. The voice notes and timeline view brought my old photos back to life. My grandkids love it too!"
     }
   ];
 
   const partnerReviews = [
     {
-      name: "Emma Watson Photography",
-      role: "Wedding Photographer",
+      name: "Amit Malhotra",
+      role: "Lead Photographer, SnapAura",
       image: "/placeholder.svg",
       rating: 5,
       review: "BloomoryAI's partner platform has revolutionized my workflow. The white-labeled sharing and watermarking features have increased my client satisfaction by 300%. The booking system is seamless!"
     },
     {
-      name: "Creative Moments Studio",
-      role: "Event Videographer",
+      name: "Neha Suresh",
+      role: "Owner, The Event Mela",
       image: "/placeholder.svg",
       rating: 5,
       review: "The AI-powered organization saves me hours of post-event work. Clients love receiving their beautifully organized galleries, and the payment integration has streamlined my business."
     },
     {
-      name: "Sunset Event Planning",
-      role: "Event Planner",
+      name: "Shivani Patel",
+      role: "Creative Head, Moments & Magic",
       image: "/placeholder.svg",
       rating: 5,
       review: "The event planning toolkit integrated with memory preservation is brilliant. My clients can plan their events and automatically preserve the memories in one platform!"
     },
     {
-      name: "Memories & More Gifts",
-      role: "Custom Gift Shop",
+      name: "Tanvi Desai",
+      role: "Director, EverAfter Weddings",
       image: "/placeholder.svg",
       rating: 5,
       review: "Being able to let customers order personalized gifts directly from their albums has increased our sales by 250%. The integration is seamless and professional."
@@ -83,10 +97,10 @@ const Testimonials = () => {
   ];
 
   const stats = [
-    { number: "4.9/5", label: "Average Rating", icon: Star },
-    { number: "10,000+", label: "Happy Users", icon: Users },
-    { number: "500+", label: "Partner Businesses", icon: Award },
-    { number: "1M+", label: "Memories Preserved", icon: Heart }
+    { number: "4.7/5", label: "Average Rating", icon: Star },
+    { number: "700+", label: "Happy Users", icon: Users },
+    { number: "35+", label: "Partner Businesses", icon: Award },
+    { number: "200K+", label: "Memories Preserved", icon: Heart }
   ];
 
   const renderStars = (rating: number) => {
@@ -216,7 +230,7 @@ const Testimonials = () => {
       </section>
 
       {/* Video Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+      {/* <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -253,10 +267,10 @@ const Testimonials = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Trust Badges */}
-      <section className="py-16 bg-white">
+      {/* <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h3 className="text-2xl font-bold text-gray-900 mb-8">
             Trusted by industry leaders
@@ -268,7 +282,7 @@ const Testimonials = () => {
             <div className="w-24 h-12 bg-gray-300 rounded"></div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

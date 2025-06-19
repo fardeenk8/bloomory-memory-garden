@@ -15,7 +15,7 @@ const Navigation = () => {
     { href: "/pricing", label: "Pricing" },
     { href: "/about", label: "About Us" },
     { href: "/testimonials", label: "Testimonials" },
-    { href: "/blog", label: "Blog" },
+    // { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -39,9 +39,13 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2" onClick={handleNavClick}>
-            <div className="bg-gradient-to-br from-pink-500 to-purple-600 w-8 h-8 rounded-lg flex items-center justify-center">
-              <Heart className="w-4 h-4 text-white" />
-            </div>
+            <img
+              src="bloomory-logo.png"
+              alt="BloomoryAI Logo"
+              style={{ height: "10rem", paddingTop: "6px" }} // 60px
+              className="w-auto"
+            />
+
             <span className="text-xl font-bold text-gray-900">BloomoryAI</span>
           </Link>
 

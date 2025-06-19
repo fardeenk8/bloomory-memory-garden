@@ -13,7 +13,7 @@ const Footer = () => {
     ],
     Company: [
       { name: "About Us", href: "/about" },
-      { name: "Blog", href: "/blog" },
+      // { name: "Blog", href: "/blog" },
       // { name: "Careers", href: "#" },
       // { name: "Press Kit", href: "#" }
     ],
@@ -57,27 +57,35 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center space-x-3 mb-6">
-              <div className="bg-gradient-to-br from-pink-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
-                <Heart className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold">BloomoryAI</span>
-            </Link>
+            <Link to="/" className="flex flex-col items-center mb-6 mt-1">
+  <img
+    src="bloomory-logo.png"
+    alt="BloomoryAI Logo"
+    style={{ height: "25rem", marginBottom: "-9rem" , marginTop: "-10rem", marginLeft: "-5rem"}} // reduce space below logo
+    className="w-auto -mb-2"
+  />
+  <div className="-ml-16">
+  <span className="text-4xl font-bold text-white leading-none">BloomoryAI</span>
+</div>
+
+</Link>
+
+
             <p className="text-gray-400 mb-6 leading-relaxed">
               AI-powered memory platform helping individuals and professionals beautifully store, organize, and share life's most meaningful moments.
             </p>
             <div className="space-y-3">
               <div className="flex items-center text-gray-400">
                 <Mail className="w-4 h-4 mr-3" />
-                hello@bloomoryai.com
+                heybloomory@gmail.com
               </div>
               <div className="flex items-center text-gray-400">
                 <Phone className="w-4 h-4 mr-3" />
-                +1 (555) 123-4567
+                +91 84520-45413
               </div>
               <div className="flex items-center text-gray-400">
                 <MapPin className="w-4 h-4 mr-3" />
-                San Francisco, CA
+                Mumbai, India
               </div>
             </div>
           </div>
@@ -105,7 +113,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 BloomoryAI. All rights reserved.
+            © 2025 BloomoryAI. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="#" className="text-gray-400 hover:text-white transition-colors">

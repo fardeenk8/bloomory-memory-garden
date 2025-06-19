@@ -247,7 +247,7 @@ const NewIndex = () => {
       </section>
 
       {/* Blog Highlights */}
-<section className="py-20 bg-gray-50">
+{/* <section className="py-20 bg-gray-50">
   <div className="max-w-7xl mx-auto px-4">
     <div className="text-center mb-16">
       <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -286,7 +286,65 @@ const NewIndex = () => {
         ))}
     </div>
   </div>
+</section> */}
+{/*how it works sections*/}
+<section className="py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        How BloomoryAI Works
+      </h2>
+      <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        A quick walkthrough of how our AI helps preserve your memories.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+      
+      {/* Upload */}
+      <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-transform duration-300 ease-in-out">
+        <img 
+          src="/upload.png" 
+          alt="Upload Screenshot" 
+          className="rounded-xl mb-4 w-full h-88 object-cover" 
+        />
+        <h3 className="text-lg font-bold text-purple-600 mb-2">1. Upload</h3>
+        <p className="text-gray-700">
+          Import your photos and videos in seconds from any device.
+        </p>
+      </div>
+
+      {/* Organize */}
+      <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-transform duration-300 ease-in-out">
+        <img 
+          src="/organize.png" 
+          alt="Organize Screenshot" 
+          className="rounded-xl mb-4 w-full h-88 object-cover" 
+        />
+        <h3 className="text-lg font-bold text-purple-600 mb-2">2. Organize</h3>
+        <p className="text-gray-700">
+          Our AI groups and tags your memories with face, event, and location data.
+        </p>
+      </div>
+
+      {/* Share */}
+      <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-transform duration-300 ease-in-out">
+        <img 
+          src="/share.png" 
+          alt="Share Screenshot" 
+          className="rounded-xl mb-4 w-full h-88 object-cover min-h-[520px]" 
+        />
+        <h3 className="text-lg font-bold text-purple-600 mb-2">3. Share</h3>
+        <p className="text-gray-700">
+          Deliver albums securely to friends or clients — beautifully packaged.
+        </p>
+      </div>
+
+    </div>
+  </div>
 </section>
+
+
 
       <Footer />
 

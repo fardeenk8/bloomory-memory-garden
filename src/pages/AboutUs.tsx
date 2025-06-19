@@ -8,8 +8,8 @@ const AboutUs = () => {
     {
       name: "Fardeen Kachawa",
       role: "CEO & Founder",
-      bio: "#",
-      image: "/placeholder.svg"
+      bio: "“On a mission to build thoughtful AI tools that make life simpler — starting with how we capture, organize, and celebrate our memories.”",
+      image: "/ceo.jpeg"
     },
     // {
     //   name: "Marcus Rodriguez",
@@ -33,17 +33,17 @@ const AboutUs = () => {
 
   const timeline = [
     {
-      year: "2022",
+      year: "2023-December",
       title: "The Idea",
       description: "Founded with the vision to make memory preservation intelligent and beautiful."
     },
     {
-      year: "2023",
+      year: "2024-September",
       title: "AI Development",
       description: "Launched our first AI-powered photo organization and facial recognition features."
     },
     {
-      year: "2024",
+      year: "2024-December",
       title: "Partner Platform",
       description: "Introduced the partner marketplace connecting users with professional memory creators."
     },
@@ -163,7 +163,7 @@ const AboutUs = () => {
                     alt={member.name}
                     className="w-32 h-32 rounded-full object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-300"
                   />
-                  <div className="absolute w-32 h-32 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all duration-300"></div>
+                  <div className="absolute w-32 h-32 rounded-full bg-gradient-to-br  transition-all duration-300"></div>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
                 <p className="text-purple-600 font-medium mb-3">{member.role}</p>

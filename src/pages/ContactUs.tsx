@@ -87,19 +87,19 @@ const ContactUs = () => {
     {
       icon: Mail,
       title: "Email Us",
-      info: "hello@bloomoryai.com",
+      info: "heybloomory@gmail.com",
       description: "For general inquiries and support"
     },
     {
       icon: Phone,
       title: "Call Us",
-      info: "+1 (555) 123-4567",
+      info: "+91 84520 45413",
       description: "Business hours: 9 AM - 6 PM PST"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      info: "San Francisco, CA",
+      info: "Mumbai, India",
       description: "Headquarters & Development Center"
     }
   ];
@@ -111,10 +111,9 @@ const ContactUs = () => {
   ];
 
   const socialLinks = [
-    { name: "Facebook", icon: Facebook, href: "https://facebook.com/bloomoryai" },
-    { name: "Twitter", icon: "custom-x", href: "https://twitter.com/bloomoryai" },
-    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/bloomoryai/" },
-    { name: "Instagram", icon: Instagram, href: "https://instagram.com/bloomoryai" }
+    { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/people/Bloomory-AI/61576679825298/" },
+    { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/bloomory-ai-592620370/" },
+    { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/bloomoryai/" }
   ];
 
   return (
