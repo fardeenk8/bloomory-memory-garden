@@ -1,5 +1,5 @@
-const axios = require('axios');
-const assert = require('assert');
+import axios from 'axios';
+import assert from 'assert';
 
 // Base URL for API requests
 const API_URL = 'http://localhost:8001/api';
