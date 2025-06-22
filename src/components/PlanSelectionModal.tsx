@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Check } from "lucide-react";
+import { post } from "@/utils/api";
 
 interface PlanSelectionModalProps {
   isOpen: boolean;
@@ -52,13 +53,15 @@ const PlanSelectionModal = ({ isOpen, onClose, selectedPlan }: PlanSelectionModa
     setIsLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log("Plan registration:", { ...formData, plan: selectedPlan });
-      
+      await post('/api/users/register', {
+        name: formData.name,
+        email: formData.email,
+        type: 'personal',
+        plan: selectedPlan,
+      });
+
       toast({
-        title: "Welcome to BloomoryAI!",
+        title: 'Welcome to BloomoryAI!',
         description: `You've successfully registered for the ${currentPlan.name} plan.`,
       });
 

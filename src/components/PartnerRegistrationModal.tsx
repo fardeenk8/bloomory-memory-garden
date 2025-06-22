@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { post } from "@/utils/api";
 
 interface PartnerRegistrationModalProps {
   isOpen: boolean;
@@ -45,13 +46,14 @@ const PartnerRegistrationModal = ({ isOpen, onClose }: PartnerRegistrationModalP
     setIsLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log("Partner registration data:", formData);
-      
+      await post('/api/users/partner', {
+        name: formData.contactName,
+        email: formData.email,
+        company: formData.businessName,
+      });
+
       toast({
-        title: "Registration Successful!",
+        title: 'Registration Successful!',
         description: "Thank you for your interest in becoming a partner. We'll contact you within 24 hours.",
       });
 

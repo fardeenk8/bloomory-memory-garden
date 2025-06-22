@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, MessageCircle, Users, Wrench, Loader2, Instagram, Linkedin, Facebook, X } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { post } from "@/utils/api";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -47,16 +48,15 @@ const ContactUs = () => {
     setIsLoading(true);
 
     try {
-      // Simulate API call to backend
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log("Contact form submission:", {
-        ...formData,
-        timestamp: new Date().toISOString()
+      await post('/api/contact', {
+        name: formData.name,
+        email: formData.email,
+        type: formData.type,
+        message: formData.message,
       });
-      
+
       toast({
-        title: "Message Sent!",
+        title: 'Message Sent!',
         description: "Thank you for contacting us. We'll get back to you within 24 hours.",
       });
 

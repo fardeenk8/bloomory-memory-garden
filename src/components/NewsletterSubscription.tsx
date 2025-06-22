@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { post } from "@/utils/api";
 
 interface NewsletterSubscriptionProps {
   className?: string;
@@ -51,36 +52,16 @@ const NewsletterSubscription = ({
     setIsLoading(true);
 
     try {
-      // Simulate API call to newsletter service
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Check for duplicate (simulate)
-      const existingSubscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
-      if (existingSubscribers.includes(email.toLowerCase())) {
-        toast({
-          title: "Already Subscribed",
-          description: "You're already subscribed to our newsletter!",
-          variant: "destructive",
-        });
-        setIsLoading(false);
-        return;
-      }
+      await post('/api/newsletter', { email });
 
-      // Save to localStorage (simulate database)
-      existingSubscribers.push(email.toLowerCase());
-      localStorage.setItem('newsletter_subscribers', JSON.stringify(existingSubscribers));
-      
-      console.log("Newsletter subscription:", { email, timestamp: new Date().toISOString() });
-      
       toast({
-        title: "Thank you for subscribing!",
+        title: 'Thank you for subscribing!',
         description: "You'll receive the latest updates and memory preservation tips.",
       });
 
-      setEmail("");
+      setEmail('');
       setIsSubscribed(true);
-      
-      // Reset subscription state after 3 seconds
+
       setTimeout(() => setIsSubscribed(false), 3000);
     } catch (error) {
       toast({
