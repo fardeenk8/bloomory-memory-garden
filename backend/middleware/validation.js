@@ -66,7 +66,7 @@ const validatePartnerFields = [
   
   body('phone')
     .optional()
-    .isMobilePhone()
+    .matches(/^\+?[\d\s\-\(\)]+$/)
     .withMessage('Please provide a valid phone number'),
   
   checkValidation
